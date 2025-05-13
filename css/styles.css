@@ -217,6 +217,8 @@ section {
   color: #ffffff;
   cursor: not-allowed;
   opacity: 0.9;
+  min-width: 300px; /* Ensure enough space for the ID */
+  font-size: 16px; /* Adjust font size for the ID */
 }
 .about .content {
   display: flex;

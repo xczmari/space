@@ -46,7 +46,9 @@
                 Adventure and Witness the Breathtaking Views of Our Planet from
                 Above
               </p>
-              <button class="book-now" onclick="scrollToAbout()">Book Now</button>
+              <button class="book-now" onclick="scrollToAbout()">
+                Book Now
+              </button>
             </div>
           </section>
         </main>
@@ -168,6 +170,7 @@
         });
       });
 
+      // Update the claim invitation button click handler
       document
         .getElementById("claimInvitation")
         .addEventListener("click", function () {
@@ -175,19 +178,31 @@
 
           // Prevent multiple clicks
           if (!button.classList.contains("claimed")) {
+            // Generate unique invitation ID
+            const invitationId =
+              "INV-" +
+              Math.random().toString(36).substring(2, 10).toUpperCase();
+
             // Add claimed class
             button.classList.add("claimed");
-            // Change text
-            button.textContent = "Claimed";
+            // Change text to show invitation ID
+            button.textContent = `Your Invitation ID: ${invitationId}`;
             // Disable button
             button.disabled = true;
 
-            // Optional: Add animation using GSAP
+            // Animation using GSAP
             gsap.to(button, {
               scale: 1.1,
               duration: 0.2,
               yoyo: true,
               repeat: 1,
+              onComplete: () => {
+                // Add fade effect for the ID reveal
+                gsap.from(button, {
+                  opacity: 0,
+                  duration: 0.5,
+                });
+              },
             });
           }
         });
@@ -205,33 +220,35 @@
         });
 
       // Add smooth scroll for all links pointing to #about
-      document.querySelectorAll('a[href="#about"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+      document.querySelectorAll('a[href="#about"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
           e.preventDefault();
-          const aboutSection = document.querySelector('#about');
+          const aboutSection = document.querySelector("#about");
           aboutSection.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
+            behavior: "smooth",
+            block: "start",
           });
         });
       });
 
       // Add smooth scroll for team link
-      document.querySelector('a[href="#team"]').addEventListener('click', function(e) {
-        e.preventDefault();
-        const teamSection = document.querySelector('#team');
-        teamSection.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
+      document
+        .querySelector('a[href="#team"]')
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          const teamSection = document.querySelector("#team");
+          teamSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
         });
-      });
 
       // Function to scroll to About section
       function scrollToAbout() {
-        const aboutSection = document.querySelector('#about');
+        const aboutSection = document.querySelector("#about");
         aboutSection.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
+          behavior: "smooth",
+          block: "start",
         });
       }
     </script>
