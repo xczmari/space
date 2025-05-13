@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Space Landing Page</title>
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <!-- AOS CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+      rel="stylesheet"
+    />
+
+    <!-- GSAP JS -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.1/dist/gsap.min.js"></script>
+
+    <!-- ScrollTrigger Plugin for GSAP -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.1/dist/ScrollTrigger.min.js"></script>
+  </head>
+
+  <body>
+    <div class="landing">
+      <div class="container">
+        <header>
+          <div class="logo">
+            <img src="images/logo.png" alt="Logo" />
+          </div>
+          <nav>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#" class="book">Book Now</a></li>
+            </ul>
+          </nav>
+        </header>
+
+        <main class="main">
+          <section class="space">
+            <div class="space-content">
+              <h1>Discover The Wonders of Space Travel</h1>
+              <p class="text-head">Reach For The Stars.</p>
+              <p class="text-body">
+                Experience the Thrill of Weightlessness as You Explore the Vast
+                Expanse of the Universe. Join Us on an Unforgettable Space
+                Adventure and Witness the Breathtaking Views of Our Planet from
+                Above
+              </p>
+              <button class="book-now">Book Now</button>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+    <div class="spliter"></div>
+    <!-- About Section -->
+    <div class="container">
+      <div class="about">
+        <div class="content">
+          <!-- Text Section -->
+          <div
+            class="text"
+            data-aos="fade-up"
+            data-aos-duration="2000"
+            data-aos-delay="500"
+          >
+            <p class="small">Journey to a Lunar Adventure</p>
+            <h1>Witness the thrill of landing on the Moon</h1>
+            <p class="text-body">
+              Our space trip offers a once-in-a-lifetime opportunity to Walk on
+              the lunar surface and embrace the wonders of space.
+            </p>
+            <button id="claimInvitation">Claim Invitation</button>
+          </div>
+
+          <!-- Moon Image Section -->
+          <div
+            class="moon"
+            data-aos="fade-in"
+            data-aos-duration="3000"
+            data-aos-delay="1000"
+          >
+            <img src="/images/moon.png" alt="Moon Image" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+      <div class="container-footer">
+        <div class="footer-grid">
+          <!-- Company Info -->
+
+          <!-- Our Team -->
+          <div class="footer-section">
+            <h3>Our Team:</h3>
+            <ul class="team-list">
+              <li>Mari</li>
+              <li>Reema</li>
+              <li>Monira</li>
+              <li>Asayel</li>
+              <li>Retaj</li>
+              <li>Jillian</li>
+              <li>Renad</li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div class="footer-section">
+            <h3>Contact Us</h3>
+            <ul class="contact-info">
+              <li>
+                <i class="fas fa-map-marker-alt"></i> Space Center, Moon Base
+                Alpha
+              </li>
+              <li><i class="fas fa-phone"></i> +1 (555) SPACE-00</li>
+              <li><i class="fas fa-envelope"></i> info@spacetravel.com</li>
+            </ul>
+          </div>
+
+          <!-- Newsletter -->
+        </div>
+        <!-- Copyright -->
+        <div class="footer-bottom">
+          <p>&copy; 2025 Space Travel. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- AOS and GSAP JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+      // Register ScrollTrigger plugin
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Initialize AOS animations
+      AOS.init();
+
+      window.addEventListener("DOMContentLoaded", (event) => {
+        // Reset button state on page load
+        const claimButton = document.getElementById("claimInvitation");
+        claimButton.classList.remove("claimed");
+        claimButton.disabled = false;
+        claimButton.textContent = "Claim Invitation";
+
+        // Initial moon animation
+        gsap.from(".moon img", {
+          scale: 0.5,
+          x: -200,
+          opacity: 0,
+          duration: 3.5,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".about",
+            start: "top bottom",
+            end: "top top",
+            scrub: 1,
+          },
+          onComplete: () => {
+            // Start rotation animation after initial animation completes
+            gsap.to(".moon img", {
+              rotation: 360,
+              duration: 2,
+              ease: "power1.inOut",
+            });
+          },
+        });
+      });
+
+      document
+        .getElementById("claimInvitation")
+        .addEventListener("click", function () {
+          const button = this;
+
+          // Prevent multiple clicks
+          if (!button.classList.contains("claimed")) {
+            // Add claimed class
+            button.classList.add("claimed");
+            // Change text
+            button.textContent = "Claimed";
+            // Disable button
+            button.disabled = true;
+
+            // Optional: Add animation using GSAP
+            gsap.to(button, {
+              scale: 1.1,
+              duration: 0.2,
+              yoyo: true,
+              repeat: 1,
+            });
+          }
+        });
+    </script>
+  </body>
+</html>
